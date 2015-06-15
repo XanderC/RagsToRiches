@@ -1,0 +1,10 @@
+<ores>
+	<ore>
+		<id>1</id>
+		<name>Stone</name>
+		<type>0</type>
+		<price>1</price>
+		<chance>5000</chance>
+		<level>0</level>
+	</ore>
+</ores>

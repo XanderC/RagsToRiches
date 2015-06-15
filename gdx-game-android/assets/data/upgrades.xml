@@ -1,0 +1,100 @@
+<upgrades>
+	<upgrade>
+		<type>0</type>
+		<category>0</category>
+			<tier>
+				<name>Wooden Pickaxe</name>
+				<level>0</level>
+				<value>0</value>
+				<cost>0</cost>
+			</tier>
+			<tier>
+				<name>Stone Pickaxe</name>
+				<level>1</level>
+				<value>1</value>
+				<cost>100</cost>
+			</tier>
+		<tier>
+			<name>Iron Pickaxe</name>
+			<level>2</level>
+			<value>2</value>
+			<cost>100</cost>
+		</tier>
+		<tier>
+			<name>Gold Pickaxe</name>
+			<level>3</level>
+			<value>3</value>
+			<cost>100</cost>
+		</tier>
+	</upgrade>
+	<upgrade>
+		<type>1</type>
+		<category>0</category>
+			<tier>
+				<name>Pickaxe Proficiency 0</name>
+				<level>0</level>
+				<value>1</value>
+				<cost>0</cost>
+			</tier>
+			<tier>
+				<name>Pickaxe Proficiency 1</name>
+				<level>1</level>
+				<value>2</value>
+				<cost>100</cost>
+			</tier>
+		<tier>
+			<name>Pickaxe Proficiency 2</name>
+			<level>2</level>
+			<value>3</value>
+			<cost>100</cost>
+		</tier>
+		<tier>
+			<name>Pickaxe Proficiency 3</name>
+			<level>3</level>
+			<value>4</value>
+			<cost>100</cost>
+		</tier>
+		<tier>
+			<name>Pickaxe Proficiency 4</name>
+			<level>4</level>
+			<value>5</value>
+			<cost>100</cost>
+		</tier>
+		<tier>
+			<name>Pickaxe Proficiency 5</name>
+			<level>5</level>
+			<value>6</value>
+			<cost>100</cost>
+		</tier>
+		<tier>
+			<name>Pickaxe Proficiency 6</name>
+			<level>6</level>
+			<value>7</value>
+			<cost>100</cost>
+		</tier>
+		<tier>
+			<name>Pickaxe Proficiency 7</name>
+			<level>7</level>
+			<value>8</value>
+			<cost>100</cost>
+		</tier>
+		<tier>
+			<name>Pickaxe Proficiency 8</name>
+			<level>8</level>
+			<value>9</value>
+			<cost>100</cost>
+		</tier>
+		<tier>
+			<name>Pickaxe Proficiency 9</name>
+			<level>9</level>
+			<value>10</value>
+			<cost>100</cost>
+		</tier>
+		<tier>
+			<name>Pickaxe Proficiency 10</name>
+			<level>10</level>
+			<value>11</value>
+			<cost>100</cost>
+		</tier>
+	</upgrade>
+</upgrades>
