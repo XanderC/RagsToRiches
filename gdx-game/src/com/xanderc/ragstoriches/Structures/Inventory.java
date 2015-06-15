@@ -55,6 +55,7 @@ public class Inventory
 		else
 		{
 			Gdx.app.log("add item", "Add new item");
+			item.setQuantity(1);
 			_inventory.add(item);
 		}
 	}

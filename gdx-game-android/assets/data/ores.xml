@@ -7,4 +7,12 @@
 		<chance>5000</chance>
 		<level>0</level>
 	</ore>
+	<ore>
+		<id>2</id>
+		<name>Copper Ore</name>
+		<type>1</type>
+		<price>5</price>
+		<chance>2500</chance>
+		<level>0</level>
+	</ore>
 </ores>

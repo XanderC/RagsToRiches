@@ -24,9 +24,12 @@ public class GameScreen implements Screen
 	private ScrollPane scrollpane = new ScrollPane(scrollTable,skin);
 	private TextButton btnMine = new TextButton("Mine",skin);
 	private TextButton btnUpgrade = new TextButton("Upgrades",skin);
+	private TextButton btnSellAmmount = new TextButton("All",skin);
 	
 	private Label lblGold = new Label("0 Gold",skin);
 	private Random rand = new Random();
+	
+	private int sellammount = 0;
 	
 	public GameScreen(RagsToRiches game)
 	{
@@ -38,8 +41,6 @@ public class GameScreen implements Screen
 	{
 		Gdx.gl.glClearColor(0,0,0,1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-		
-		
 		
 		stage.act(delta);
 		stage.draw();
@@ -67,6 +68,7 @@ public class GameScreen implements Screen
 		table.add(btnMine).size(500,500).center();
 		
 		menuTable.add(btnUpgrade).size(150,200).left();
+		menuTable.add(btnSellAmmount).size(150,200).left();
 		
 		scrollpane.setSize(Gdx.graphics.getWidth(),200);
 		scrollpane.setPosition(0,Gdx.graphics.getHeight()- scrollpane.getHeight());
@@ -81,6 +83,37 @@ public class GameScreen implements Screen
 					mine();
 				}
 		});
+		
+		btnSellAmmount.addListener(new ClickListener()
+			{
+				@Override
+				public void clicked(InputEvent event, float x, float y)
+				{
+					switch(sellammount)
+					{
+						case 0:
+							btnSellAmmount.setText("x1");
+							sellammount = 1;
+							break;
+						case 1:
+							btnSellAmmount.setText("x10");
+							sellammount = 10;
+							break;
+						case 10:
+							btnSellAmmount.setText("x100");
+							sellammount = 100;
+							break;
+						case 100:
+							btnSellAmmount.setText("x1000");
+							sellammount = 1000;
+							break;
+						case 1000:
+							btnSellAmmount.setText("xAll");
+							sellammount = 0;
+							break;
+					}
+				}
+			});
 		
 		btnUpgrade.addListener(new ClickListener()
 			{
@@ -100,7 +133,6 @@ public class GameScreen implements Screen
 	{
 		ArrayList<IItem> ores = _game.getItemManager().getOresByMiningLevel(_game.getUpgradeManager().getUpgrade(UpgradeType.PickaxeLevel).getCurrentTier());
 		
-		Gdx.app.log("ores","has : " + ores.size());
 		if(ores.size() > 0)
 		{
 			for(int i = 0;i < _game.getUpgradeManager().getUpgrade(UpgradeType.PickaxeProficiency).getCurrentTier().getValue(); i++)
@@ -123,8 +155,6 @@ public class GameScreen implements Screen
 			
 					if (chance <= cumulativeProbability) 
 					{
-						Gdx.app.log("ores","gets here" );
-						
 						_game.getInventory().addItem(item);
 						updateOres();
 						break;
@@ -136,10 +166,26 @@ public class GameScreen implements Screen
 	
 	private void sell(IItem item)
 	{
-		_game.getPlayer().addGold(item.getPrice() * item.getQuantity());
-		_game.getInventory().removeItem(item);
-		lblGold.setText(_game.getPlayer().getGold() + " Gold");
-		updateOres();
+		if(sellammount == 0)
+		{
+			_game.getPlayer().addGold(item.getPrice() * item.getQuantity());
+			_game.getInventory().getItem(item.getItemType()).removeQuantity(item.getQuantity());
+			lblGold.setText(_game.getPlayer().getGold() + " Gold");
+			updateOres();
+		}
+		else if(item.getQuantity() >= sellammount)
+		{
+			_game.getPlayer().addGold(item.getPrice() * sellammount);
+			_game.getInventory().getItem(item.getItemType()).removeQuantity(sellammount);
+			lblGold.setText(_game.getPlayer().getGold() + " Gold");
+			updateOres();
+		}
+		
+		if(_game.getInventory().getItem(item.getItemType()).getQuantity() <= 0)
+		{
+			_game.getInventory().removeItem(item);
+			updateOres();
+		}
 	}
 	
 	private void updateOres()
