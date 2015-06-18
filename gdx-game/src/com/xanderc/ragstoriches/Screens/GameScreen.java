@@ -5,11 +5,12 @@ import com.badlogic.gdx.graphics.g2d.*;
 import com.badlogic.gdx.scenes.scene2d.*;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.*;
+import com.badlogic.gdx.utils.*;
 import com.xanderc.ragstoriches.*;
+import com.xanderc.ragstoriches.Enums.*;
 import com.xanderc.ragstoriches.Interfaces.*;
 import com.xanderc.ragstoriches.Structures.*;
 import java.util.*;
-import com.xanderc.ragstoriches.Enums.*;
 
 public class GameScreen implements Screen
 {
@@ -25,7 +26,7 @@ public class GameScreen implements Screen
 	private TextButton btnMine = new TextButton("Mine",skin);
 	private TextButton btnUpgrade = new TextButton("Upgrades",skin);
 	private TextButton btnSellAmmount = new TextButton("All",skin);
-	
+	private TextButton btnSmelting = new TextButton("Smelting",skin);
 	private Label lblGold = new Label("0 Gold",skin);
 	private Random rand = new Random();
 	
@@ -68,6 +69,7 @@ public class GameScreen implements Screen
 		table.add(btnMine).size(500,500).center();
 		
 		menuTable.add(btnUpgrade).size(150,200).left();
+		menuTable.add(btnSmelting).size(150,200).left();
 		menuTable.add(btnSellAmmount).size(150,200).left();
 		
 		scrollpane.setSize(Gdx.graphics.getWidth(),200);
@@ -123,6 +125,15 @@ public class GameScreen implements Screen
 					((Game)Gdx.app.getApplicationListener()).setScreen(new UpgradeScreen(_game));
 				}
 			});
+		
+		btnSmelting.addListener(new ClickListener()
+			{
+				@Override
+				public void clicked(InputEvent event, float x, float y)
+				{
+					((Game)Gdx.app.getApplicationListener()).setScreen(new SmeltingScreen(_game));
+				}
+			});
 			
 		updateOres();
 		
@@ -144,18 +155,37 @@ public class GameScreen implements Screen
 				//get chances
 				for(IItem item : ores)
 				{
-					maxchance += item.getChance();
+					if(item instanceof Ore)
+					{
+						Ore ore = (Ore)item;
+						maxchance += ore.getChance();
+					}
+					else if(item instanceof Gem)
+					{
+						Gem gem = (Gem)item;
+						maxchance += gem.getChance();
+					}
 				}
 		
 				chance = rand.nextInt(maxchance);
 		
 				for (IItem item : ores)
 				{
-					cumulativeProbability += item.getChance();
+					if(item instanceof Ore)
+					{
+						Ore ore = (Ore)item;
+						cumulativeProbability += ore.getChance();
+					}
+					else if(item instanceof Gem)
+					{
+						Gem gem = (Gem)item;
+						cumulativeProbability += gem.getChance();
+					}
+					
 			
 					if (chance <= cumulativeProbability) 
 					{
-						_game.getInventory().addItem(item);
+						_game.getInventory().addItem(item,1);
 						updateOres();
 						break;
 					}
@@ -164,46 +194,47 @@ public class GameScreen implements Screen
 		}	
 	}
 	
-	private void sell(IItem item)
+	private void sell(Items item)
 	{
+		InventoryItem ii = _game.getInventory().getInventoryItem(item);
+		
 		if(sellammount == 0)
 		{
-			_game.getPlayer().addGold(item.getPrice() * item.getQuantity());
-			_game.getInventory().getItem(item.getItemType()).removeQuantity(item.getQuantity());
+			_game.getPlayer().addGold(ii.getItem().getPrice() * ii.getQuantity());
+			_game.getInventory().removeItem(item,ii.getQuantity());
 			lblGold.setText(_game.getPlayer().getGold() + " Gold");
-			updateOres();
+			
 		}
-		else if(item.getQuantity() >= sellammount)
+		else if(ii.getQuantity() >= sellammount)
 		{
-			_game.getPlayer().addGold(item.getPrice() * sellammount);
-			_game.getInventory().getItem(item.getItemType()).removeQuantity(sellammount);
+			_game.getPlayer().addGold(ii.getItem().getPrice() * sellammount);
+			_game.getInventory().removeItem(item,sellammount);
 			lblGold.setText(_game.getPlayer().getGold() + " Gold");
-			updateOres();
+			
 		}
 		
-		if(_game.getInventory().getItem(item.getItemType()).getQuantity() <= 0)
-		{
-			_game.getInventory().removeItem(item);
-			updateOres();
-		}
+		updateOres();
 	}
 	
 	private void updateOres()
 	{
 		scrollTable.clear();
-
-		for(IItem i : _game.getInventory().getInventory())
+		ArrayMap<Items,InventoryItem> inv = _game.getInventory().getInventory();
+		Iterator<ObjectMap.Entry<Items, InventoryItem>> itr = inv.iterator();
+		
+		
+		while(itr.hasNext())
 		{
-			final IItem item = i;
+			final IItem item = itr.next().value.getItem();
 			TextButton button = new TextButton("",skin);
 
-			button.setText(_game.getInventory().getItem(i.getItemType()).getName() + " x " + _game.getInventory().getItem(i.getItemType()).getQuantity());
+			button.setText(_game.getInventory().getInventoryItem(RRUtilities.getItemEnumById(item.getId())).getItem().getName() + " x " + _game.getInventory().getInventoryItem(RRUtilities.getItemEnumById(item.getId())).getQuantity());
 			button.addListener(new ClickListener()
 				{
 					@Override
 					public void clicked(InputEvent event, float x, float y)
 					{
-						sell(item);
+						sell(RRUtilities.getItemEnumById(item.getId()));
 					}
 				});
 

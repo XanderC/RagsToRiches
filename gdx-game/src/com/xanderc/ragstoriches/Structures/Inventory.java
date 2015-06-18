@@ -1,62 +1,78 @@
 package com.xanderc.ragstoriches.Structures;
 
 import com.badlogic.gdx.*;
+import com.badlogic.gdx.utils.*;
 import com.xanderc.ragstoriches.Enums.*;
 import com.xanderc.ragstoriches.Interfaces.*;
 import java.util.*;
+import com.xanderc.ragstoriches.*;
 
 public class Inventory
 {
-	private ArrayList<IItem> _inventory = new ArrayList<IItem>();
+	private static ArrayMap<Items,InventoryItem> _inventory = new ArrayMap<Items,InventoryItem>();
 
-	public void removeItem(IItem item)
-	{
-		item.setQuantity(1);
-		_inventory.remove(item);
-	}
-
-	public IItem getItem(ItemType type)
-	{
-		for(IItem i : _inventory)
-		{
-			if(i.getItemType() == type)
-			{
-				return i;
-			}
-		}
-		return null;
-	}
-
-	public boolean hasItem(ItemType type)
-	{
-		for(IItem i : _inventory)
-		{
-			if(i.getItemType() == type)
-			{
-				return true;
-			}
-		}
-		return false;
-	}
-
-	public ArrayList<IItem> getInventory()
+	public ArrayMap<Items, InventoryItem> getInventory()
 	{
 		return _inventory;
 	}
-	
-	public void addItem(IItem item)
+
+	public InventoryItem getInventoryItem(Items type)
 	{
-		if(hasItem(item.getItemType()))
+		if(_inventory.containsKey(type))
 		{
-			Gdx.app.log("add item", "Add quantity.");
-			
-			getItem(item.getItemType()).addQuantity(1/*item.getQuantity()*/);
+			return _inventory.get(type);
 		}
 		else
 		{
-			Gdx.app.log("add item", "Add new item");
-			item.setQuantity(1);
-			_inventory.add(item);
+			return null;
 		}
+	}
+
+	public boolean hasItem(Items type)
+	{
+		if(_inventory.containsKey(type))
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
+
+	public void addItem(IItem item,int quantity)
+	{
+		if(_inventory.containsKey(RRUtilities.getItemEnumById(item.getId())))
+		{
+			_inventory.get(RRUtilities.getItemEnumById(item.getId())).addQuantity(quantity);
+		}
+		else
+		{
+			InventoryItem ii = new InventoryItem();
+			ii.setItem(item);
+			ii.setQuantity(quantity);
+			_inventory.put(RRUtilities.getItemEnumById(item.getId()),ii);
+		}
+	}
+	
+	public void removeItem(Items item,int quantity)
+	{
+		if(_inventory.containsKey(item))
+		{
+			if(_inventory.get(item).getQuantity() >= quantity)
+			{
+				_inventory.get(item).removeQuantity(quantity);
+			}
+			
+			if(_inventory.get(item).getQuantity() <= 0)
+			{
+				_inventory.removeKey(item);
+				_inventory.removeValue(_inventory.get(item),true);
+
+			}
+		}
+		
+		
+		
 	}
 }

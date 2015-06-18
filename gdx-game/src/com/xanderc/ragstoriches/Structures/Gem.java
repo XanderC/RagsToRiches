@@ -4,19 +4,10 @@ import com.xanderc.ragstoriches.Interfaces.*;
 
 public class Gem implements IItem
 {
-
-	@Override
-	public void setQuantity(int quantity)
-	{
-		_quantity = quantity;
-	}
-	
 	private int _id;
 	private int _mininglevel;
 	private int _price;
-	private int _quantity;
 	private int _chance;
-	private ItemType _type;
 	private String _name;
 	
 	@Override
@@ -53,36 +44,6 @@ public class Gem implements IItem
 	public void setPrice(int price)
 	{
 		_price = price;
-	}
-	
-	@Override
-	public ItemType getItemType()
-	{
-		return _type;
-	}
-
-	@Override
-	public void setItemType(ItemType type)
-	{
-		_type = type;
-	}
-
-	@Override
-	public int getQuantity()
-	{
-		return _quantity;
-	}
-
-	@Override
-	public void addQuantity(int quantity)
-	{
-		_quantity += quantity;
-	}
-
-	@Override
-	public void removeQuantity(int quantity)
-	{
-		_quantity -= quantity;
 	}
 	
 	@Override

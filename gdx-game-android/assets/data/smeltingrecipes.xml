@@ -1,0 +1,10 @@
+<recipes>
+	<recipe>
+		<itemid>10</itemid>
+		<time>5000</time>
+		<requirement>
+			<itemid>1</itemid>
+			<quantity>2</quantity>
+		</requirement>
+	</recipe>
+</recipes>

@@ -1,14 +1,24 @@
 package com.xanderc.ragstoriches.Structures;
 import com.xanderc.ragstoriches.*;
-import com.xanderc.ragstoriches.Enums.*;
+import com.xanderc.ragstoriches.Interfaces.*;
 import java.util.*;
 
 public class SmeltingRecipe
 {
-	private String _name;
-	private SmeltingType _type;
+	private IItem _item;
+	private int _time;
 	private ArrayList<SmeltingRequirement> _requirements = new ArrayList<SmeltingRequirement>();
 	private RRTimer _timer;
+	
+	public void setTime(int time)
+	{
+		_time = time;
+	}
+
+	public int getTime()
+	{
+		return _time;
+	}
 
 	public void setTimer(RRTimer timer)
 	{
@@ -30,23 +40,45 @@ public class SmeltingRecipe
 		return _requirements;
 	}
 
-	public void setType(SmeltingType type)
+	public void setItem(IItem item)
 	{
-		_type = type;
+		_item = item;
 	}
 
-	public SmeltingType getType()
+	public IItem getItem()
 	{
-		return _type;
+		return _item;
 	}
-
-	public void setName(String name)
+	
+	public boolean hasRequirements(Inventory inventory)
 	{
-		_name = name;
+		for(SmeltingRequirement sr : _requirements)
+		{
+			if(inventory.hasItem(RRUtilities.getItemEnumById(sr.getItem().getId())))
+			{
+				if(inventory.getInventoryItem(RRUtilities.getItemEnumById(sr.getItem().getId())).getQuantity() >= sr.getQuantity())
+				{
+					continue;
+				}
+				else
+				{
+					return false;
+				}
+			}
+			else
+			{
+				return false;
+			}
+		}
+		return true;
+		
 	}
-
-	public String getName()
+	
+	public void removeRequirements(Inventory inventory)
 	{
-		return _name;
+		for(SmeltingRequirement sr : _requirements)
+		{
+			inventory.removeItem(RRUtilities.getItemEnumById(sr.getItem().getId()),sr.getQuantity());
+		}
 	}
 }

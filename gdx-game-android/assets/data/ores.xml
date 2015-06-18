@@ -1,6 +1,6 @@
 <ores>
 	<ore>
-		<id>1</id>
+		<id>0</id>
 		<name>Stone</name>
 		<type>0</type>
 		<price>1</price>
@@ -8,7 +8,7 @@
 		<level>0</level>
 	</ore>
 	<ore>
-		<id>2</id>
+		<id>1</id>
 		<name>Copper Ore</name>
 		<type>1</type>
 		<price>5</price>

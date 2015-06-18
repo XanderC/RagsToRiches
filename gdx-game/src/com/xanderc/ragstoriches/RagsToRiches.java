@@ -16,7 +16,7 @@ public class RagsToRiches extends Game
 	private static UpgradeManager _upgradeManager = new UpgradeManager();
 	private static ItemManager _itemManager;
 	private static Player _player;
-
+	
 	public static ItemManager getItemManager()
 	{
 		return _itemManager;
@@ -51,7 +51,7 @@ public class RagsToRiches extends Game
 		_itemManager = new ItemManager();
 		_itemManager.loadItems();
 		_upgradeManager.loadUpgrades();
-		
+		_smeltingManager.loadSmeltingRecipes();
 		setScreen(new MainMenuScreen(this));
 	}
 

@@ -13,6 +13,7 @@ public class StatusBar extends Actor
     private NinePatchDrawable loadingBarBackground;
     private NinePatchDrawable loadingBar;
 	private Label _label;
+	
     public StatusBar(Color color,String text) 
 	{
         TextureAtlas skinAtlas = new TextureAtlas(Gdx.files.internal("ui/uiskin.atlas"));
@@ -41,6 +42,7 @@ public class StatusBar extends Actor
 		_label.draw(batch,1f);
     }
 
+	
 	public void update(int health,int maxhealth)
 	{
 		float progress = maxhealth - health;

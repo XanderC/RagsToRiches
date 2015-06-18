@@ -11,18 +11,18 @@ import com.xanderc.ragstoriches.*;
 public class SmeltingManager
 {
 	private final RagsToRiches _game;
-	private ArrayMap<SmeltingType,SmeltingRecipe> _smeltingList = new ArrayMap<SmeltingType,SmeltingRecipe>();
+	private ArrayMap<Items,SmeltingRecipe> _smeltingList = new ArrayMap<Items,SmeltingRecipe>();
 
 	public SmeltingManager(RagsToRiches game)
 	{
 		_game = game;
 	}
-	public ArrayMap<SmeltingType,SmeltingRecipe> getSmeltingRecipes()
+	public ArrayMap<Items,SmeltingRecipe> getSmeltingRecipes()
 	{
 		return _smeltingList;
 	}
 	
-	public SmeltingRecipe getSmeltingRecipe(SmeltingType type)
+	public SmeltingRecipe getSmeltingRecipe(Items type)
 	{
 		if(_smeltingList.containsKey(type))
 		{
@@ -32,7 +32,6 @@ public class SmeltingManager
 		{
 			return null;
 		}
-		
 	}
 	
 	public void loadSmeltingRecipes()
@@ -47,9 +46,11 @@ public class SmeltingManager
 			for (XmlReader.Element child : recipes)
 			{
 				SmeltingRecipe s = new SmeltingRecipe();
-				s.setName(child.get("name"));
-				s.setType(getTypeById(Integer.parseInt(child.get("type"))));
-				
+				s.setItem(_game.getItemManager().getItemById(Integer.parseInt(child.get("itemid"))));
+				RRTimer t = new RRTimer();
+				t.setState(TimerState.Finished);
+				s.setTime(Integer.parseInt(child.get("time")));
+				s.setTimer(t);
 				
 
 				Array<XmlReader.Element> requirements = child.getChildrenByName("requirement");
@@ -57,35 +58,14 @@ public class SmeltingManager
 				for (XmlReader.Element requirement : requirements)
 				{
 					SmeltingRequirement r = new SmeltingRequirement();
-					r.setItem(_game.getItemManager().getItemByItemType(_game.getItemManager().getItemTypeById(Integer.parseInt(requirement.get("type")))));
+					r.setItem(_game.getItemManager().getItemByItemType(RRUtilities.getItemEnumById(Integer.parseInt(requirement.get("itemid")))));
 					r.setQuantity(Integer.parseInt(requirement.get("quantity")));
 					s.addRequirements(r);
-					
-		
 				}
 
-				_smeltingList.put(s.getType(),s);
+				_smeltingList.put(RRUtilities.getItemEnumById(s.getItem().getId()),s);
 			}
 		}
 		catch(IOException e){}
 	}
-
-	public SmeltingType getTypeById(int id)
-	{
-		SmeltingType type = null;
-		
-		switch(id)
-		{
-			case 0:
-				type = SmeltingType.CopperIngot;
-				break;
-		}
-		
-		return type;
-	}
-
-	
-	
-	
-	
 }

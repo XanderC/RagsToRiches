@@ -1,6 +1,6 @@
 package com.xanderc.ragstoriches.Enums;
 
-public enum ItemType
+public enum Items
 {
 	Stone,
 	Copper,
@@ -11,5 +11,10 @@ public enum ItemType
 	Emerald,
 	Saphire,
 	Ruby,
-	Diamond
+	Diamond,
+	CopperIngot,
+	IronIngot,
+	SilverIngot,
+	GoldIngot,
+	PlatinumIngot
 }

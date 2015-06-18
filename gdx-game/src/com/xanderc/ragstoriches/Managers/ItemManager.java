@@ -7,17 +7,18 @@ import com.xanderc.ragstoriches.Interfaces.*;
 import com.xanderc.ragstoriches.Structures.*;
 import java.io.*;
 import java.util.*;
+import com.xanderc.ragstoriches.*;
 
 public class ItemManager
 {
-	ArrayMap<ItemType,IItem> _itemList = new ArrayMap<ItemType,IItem>();
-
+	ArrayMap<Items,IItem> _itemList = new ArrayMap<Items,IItem>();
+	
 	public ArrayList<IItem> getOres()
 	{
 		ArrayList<IItem> ores = new ArrayList<IItem>();
 		
-		ArrayMap<ItemType,IItem> items = new ArrayMap<ItemType,IItem>();
-		Iterator<ObjectMap.Entry<ItemType,IItem>> itr = items.iterator();
+		ArrayMap<Items,IItem> items = new ArrayMap<Items,IItem>();
+		Iterator<ObjectMap.Entry<Items,IItem>> itr = items.iterator();
 		
 		
 		while(itr.hasNext())
@@ -34,6 +35,12 @@ public class ItemManager
 	
 	public void loadItems()
 	{
+		loadOres();
+		loadSmeltingItems();
+	}
+	
+	public void loadOres()
+	{
 		try
 		{
 			FileHandle file = Gdx.files.internal("data/ores.xml");
@@ -45,19 +52,70 @@ public class ItemManager
 			{
 				Ore o = new Ore();
 				o.setId(Integer.parseInt(child.get("id")));
-				o.setItemType(getItemTypeById(Integer.parseInt(child.get("type"))));
 				o.setMiningLevel(Integer.parseInt(child.get("level")));
 				o.setName(child.get("name"));
 				o.setPrice(Integer.parseInt(child.get("price")));
 				o.setChance(Integer.parseInt(child.get("chance")));
-				o.setQuantity(0);
-				_itemList.put(o.getItemType(),o);
+
+				_itemList.put(RRUtilities.getItemEnumById(o.getId()),o);
 			}
+
+
 		}
 		catch(IOException e){}
 	}
 	
-	public IItem getItemByItemType(ItemType type)
+	public void loadGems()
+	{
+		try
+		{
+			FileHandle file = Gdx.files.internal("data/gems.xml");
+			XmlReader reader = new XmlReader();
+			XmlReader.Element root = reader.parse(file);
+			Array<XmlReader.Element> ores = root.getChildrenByName("ore");
+
+			for (XmlReader.Element child : ores)
+			{
+				Gem g = new Gem();
+				g.setId(Integer.parseInt(child.get("id")));
+				g.setMiningLevel(Integer.parseInt(child.get("level")));
+				g.setName(child.get("name"));
+				g.setPrice(Integer.parseInt(child.get("price")));
+				g.setChance(Integer.parseInt(child.get("chance")));
+
+				_itemList.put(RRUtilities.getItemEnumById(g.getId()),g);
+			}
+
+
+		}
+		catch(IOException e){}
+	}
+	
+	public void loadSmeltingItems()
+	{
+		try
+		{
+			FileHandle file = Gdx.files.internal("data/items.xml");
+			XmlReader reader = new XmlReader();
+			XmlReader.Element root = reader.parse(file);
+			Array<XmlReader.Element> items = root.getChildrenByName("item");
+
+			for (XmlReader.Element child : items)
+			{
+				Item i = new Item();
+				i.setId(Integer.parseInt(child.get("id")));
+				i.setName(child.get("name"));
+				i.setPrice(Integer.parseInt(child.get("price")));
+				
+				_itemList.put(RRUtilities.getItemEnumById(i.getId()),i);
+			}
+
+
+		}
+		catch(IOException e){}
+	}
+	
+	public IItem getItemByItemType(Items type)
 	{
 		if(_itemList.containsKey(type))
 		{
@@ -69,21 +127,21 @@ public class ItemManager
 		}
 	}
 	
-	public ItemType getItemTypeById(int id)
+	public IItem getItemById(int id)
 	{
-		ItemType type = null;
-		switch(id)
+		Items type = RRUtilities.getItemEnumById(id);
+		
+		if(_itemList.containsKey(type))
 		{
-			case 0:
-				type = ItemType.Stone;
-				break;
-			case 1:
-				type = ItemType.Copper;
-				break;
+			return _itemList.get(type);
 		}
-
-		return type;
+		else
+		{
+			return null;
+		}
 	}
+	
+	
 	
 	public ArrayList<IItem> getOresByMiningLevel(UpgradeTier level)
 	{
@@ -91,9 +149,13 @@ public class ItemManager
 
 		for(IItem i : _itemList.values())
 		{
-			if(i instanceof Ore && i.getMiningLevel() <= level.getValue())
+			if(i instanceof Ore)
 			{
-				ores.add(i);
+				Ore ore = (Ore)i;
+				if(ore.getMiningLevel() <= level.getValue())
+				{
+					ores.add(ore);
+				}
 			}
 		}
 

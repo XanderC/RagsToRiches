@@ -1,7 +1,9 @@
 package com.xanderc.ragstoriches;
 
+import com.badlogic.gdx.graphics.*;
 import com.badlogic.gdx.utils.*;
 import com.xanderc.ragstoriches.Enums.*;
+import com.xanderc.ragstoriches.Screens.Actors.*;
 import java.util.concurrent.*;
 
 public class RRTimer
@@ -10,10 +12,17 @@ public class RRTimer
 		private long _finishtime = 0;
 		private long _remainingtime =0;
 		private TimerState _state = TimerState.Finished;
+		private StatusBar _stausbar = new StatusBar(Color.GREEN,"");
 		
 		public RRTimer()
 		{
 			
+		}
+
+	
+		public StatusBar getStausbar()
+		{
+			return _stausbar;
 		}
 
 		public void setState(TimerState state)
@@ -25,8 +34,6 @@ public class RRTimer
 		{
 			return _state;
 		}
-
-		
 
 		public long getRemainingTime()
 		{
@@ -40,7 +47,7 @@ public class RRTimer
 
 		public long getFinishTime()
 		{
-			return _finishtime/1000;
+			return _finishtime;
 		}
 		
 		public void setTime(int time)
@@ -56,7 +63,7 @@ public class RRTimer
 				_remainingtime = (_finishtime - TimeUtils.millis());
 				_state = TimerState.Running;
 			}
-			else
+			else if(_state != TimerState.Finished)
 			{
 				_state = TimerState.Completed;
 			}
