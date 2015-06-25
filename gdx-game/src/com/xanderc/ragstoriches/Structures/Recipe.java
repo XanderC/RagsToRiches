@@ -2,13 +2,20 @@ package com.xanderc.ragstoriches.Structures;
 import com.xanderc.ragstoriches.*;
 import com.xanderc.ragstoriches.Interfaces.*;
 import java.util.*;
+import com.xanderc.ragstoriches.Enums.*;
 
-public class SmeltingRecipe
+public class Recipe
 {
 	private IItem _item;
 	private int _time;
-	private ArrayList<SmeltingRequirement> _requirements = new ArrayList<SmeltingRequirement>();
+	private ArrayList<RecipeRequirement> _requirements = new ArrayList<RecipeRequirement>();
 	private RRTimer _timer;
+	private RecipeType _type;
+	
+	public void setType(RecipeType type)
+	{
+		
+	}
 	
 	public void setTime(int time)
 	{
@@ -30,12 +37,12 @@ public class SmeltingRecipe
 		return _timer;
 	}
 
-	public void addRequirements(SmeltingRequirement requirements)
+	public void addRequirements(RecipeRequirement requirements)
 	{
 		_requirements.add(requirements);
 	}
 
-	public ArrayList<SmeltingRequirement> getRequirements()
+	public ArrayList<RecipeRequirement> getRequirements()
 	{
 		return _requirements;
 	}
@@ -52,7 +59,7 @@ public class SmeltingRecipe
 	
 	public boolean hasRequirements(Inventory inventory)
 	{
-		for(SmeltingRequirement sr : _requirements)
+		for(RecipeRequirement sr : _requirements)
 		{
 			if(inventory.hasItem(RRUtilities.getItemEnumById(sr.getItem().getId())))
 			{
@@ -76,7 +83,7 @@ public class SmeltingRecipe
 	
 	public void removeRequirements(Inventory inventory)
 	{
-		for(SmeltingRequirement sr : _requirements)
+		for(RecipeRequirement sr : _requirements)
 		{
 			inventory.removeItem(RRUtilities.getItemEnumById(sr.getItem().getId()),sr.getQuantity());
 		}

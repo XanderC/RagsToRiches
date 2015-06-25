@@ -15,4 +15,236 @@
 		<chance>2500</chance>
 		<level>0</level>
 	</ore>
+	<ore>
+		<id>2</id>
+		<name>Tin Ore</name>
+		<type>2</type>
+		<price>10</price>
+		<chance>1250</chance>
+		<level>1</level>
+	</ore>
+	<ore>
+		<id>3</id>
+		<name>Iron Ore</name>
+		<type>3</type>
+		<price>20</price>
+		<chance>625</chance>
+		<level>2</level>
+	</ore>
+	<ore>
+		<id>4</id>
+		<name>Silver Ore</name>
+		<type>4</type>
+		<price>40</price>
+		<chance>312</chance>
+		<level>4</level>
+	</ore>
+	<ore>
+		<id>5</id>
+		<name>Gold Ore</name>
+		<type>5</type>
+		<price>80</price>
+		<chance>156</chance>
+		<level>5</level>
+	</ore>
+	<ore>
+		<id>6</id>
+		<name>Lead Ore</name>
+		<type>6</type>
+		<price>160</price>
+		<chance>78</chance>
+		<level>6</level>
+	</ore>
+	<ore>
+		<id>7</id>
+		<name>Nickel Ore</name>
+		<type>7</type>
+		<price>320</price>
+		<chance>49</chance>
+		<level>7</level>
+	</ore>
+	<ore>
+		<id>8</id>
+		<name>Zinc Ore</name>
+		<type>8</type>
+		<price>640</price>
+		<chance>24</chance>
+		<level>8</level>
+	</ore>
+	<ore>
+		<id>9</id>
+		<name>Platinum Ore</name>
+		<type>9</type>
+		<price>1280</price>
+		<chance>12</chance>
+		<level>9</level>
+	</ore>
+	<ore>
+		<id>10</id>
+		<name>Aluminium Ore</name>
+		<type>10</type>
+		<price>2560</price>
+		<chance>6</chance>
+		<level>10</level>
+	</ore>
+	<ore>
+		<id>11</id>
+		<name>Titanium Ore</name>
+		<type>11</type>
+		<price>5120</price>
+		<chance>3</chance>
+		<level>11</level>
+	</ore>
+	<ore>
+		<id>12</id>
+		<name>Arsenic Ore</name>
+		<type>12</type>
+		<price>10240</price>
+		<chance>2</chance>
+		<level>12</level>
+	</ore>
+	<ore>
+		<id>13</id>
+		<name>Carbon Ore</name>
+		<type>13</type>
+		<price>20480</price>
+		<chance>2</chance>
+		<level>13</level>
+	</ore>
+	<ore>
+		<id>14</id>
+		<name>Indium Ore</name>
+		<type>14</type>
+		<price>40960</price>
+		<chance>2500</chance>
+		<level>14</level>
+	</ore>
+	<ore>
+		<id>1</id>
+		<name>Copper Ore</name>
+		<type>1</type>
+		<price>5</price>
+		<chance>2500</chance>
+		<level>0</level>
+	</ore>
+	<ore>
+		<id>16</id>
+		<name>Rhodium Ore</name>
+		<type>16</type>
+		<price>163840</price>
+		<chance>2</chance>
+		<level>16</level>
+	</ore>
+	<ore>
+		<id>17</id>
+		<name>Palladium Ore</name>
+		<type>17</type>
+		<price>324680</price>
+		<chance>2</chance>
+		<level>17</level>
+	</ore>
+	<ore>
+		<id>18</id>
+		<name>Sulfur Ore</name>
+		<type>18</type>
+		<price>649360</price>
+		<chance>2</chance>
+		<level>18</level>
+	</ore>
+	<ore>
+		<id>19</id>
+		<name>Bismuth Ore</name>
+		<type>19</type>
+		<price>1298720</price>
+		<chance>2</chance>
+		<level>19</level>
+	</ore>
+	<ore>
+		<id>20</id>
+		<name>Chromium Ore</name>
+		<type>20</type>
+		<price>2597440</price>
+		<chance>2</chance>
+		<level>20</level>
+	</ore>
+	<ore>
+		<id>21</id>
+		<name>Cadmium Ore</name>
+		<type>21</type>
+		<price>5194880</price>
+		<chance>2</chance>
+		<level>21</level>
+	</ore>
+	<ore>
+		<id>22</id>
+		<name>Mercury Ore</name>
+		<type>22</type>
+		<price>10389760</price>
+		<chance>2</chance>
+		<level>22</level>
+	</ore>
+	<ore>
+		<id>23</id>
+		<name>Rhenium Ore</name>
+		<type>23</type>
+		<price>20779520</price>
+		<chance>2</chance>
+		<level>23</level>
+	</ore>
+	<ore>
+		<id>24</id>
+		<name>Tantalum Ore</name>
+		<type>24</type>
+		<price>41559040</price>
+		<chance>2</chance>
+		<level>24</level>
+	</ore>
+	<ore>
+		<id>25</id>
+		<name>Antimony Ore</name>
+		<type>25</type>
+		<price>83118080</price>
+		<chance>2</chance>
+		<level>25</level>
+	</ore>
+	<ore>
+		<id>26</id>
+		<name>Silicon Ore</name>
+		<type>26</type>
+		<price>166236160</price>
+		<chance>2</chance>
+		<level>26</level>
+	</ore>
+	<ore>
+		<id>27</id>
+		<name>Vanadium Ore</name>
+		<type>27</type>
+		<price>332472320</price>
+		<chance>2</chance>
+		<level>27</level>
+	</ore>
+	<ore>
+		<id>28</id>
+		<name>Selenium Ore</name>
+		<type>28</type>
+		<price>664944640</price>
+		<chance>2</chance>
+		<level>28</level>
+	</ore>
+	<ore>
+		<id>29</id>
+		<name>Iridium Ore</name>
+		<type>29</type>
+		<price>1325889280</price>
+		<chance>2</chance>
+		<level>29</level>
+	</ore>
+	<ore>
+		<id>30</id>
+		<name>Tellurium Ore</name>
+		<type>30</type>
+		<price>265177836</price>
+		<chance>2</chance>
+		<level>30</level>
+	</ore>
 </ores>

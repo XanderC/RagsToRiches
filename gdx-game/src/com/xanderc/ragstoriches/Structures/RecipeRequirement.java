@@ -2,7 +2,7 @@ package com.xanderc.ragstoriches.Structures;
 
 import com.xanderc.ragstoriches.Interfaces.*;
 
-public class SmeltingRequirement
+public class RecipeRequirement
 {
 	private IItem _item;
 	private int _quantity;

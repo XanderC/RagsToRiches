@@ -14,18 +14,18 @@
 				<value>1</value>
 				<cost>100</cost>
 			</tier>
-		<tier>
-			<name>Iron Pickaxe</name>
-			<level>2</level>
-			<value>2</value>
-			<cost>100</cost>
-		</tier>
-		<tier>
-			<name>Gold Pickaxe</name>
-			<level>3</level>
-			<value>3</value>
-			<cost>100</cost>
-		</tier>
+			<tier>
+				<name>Iron Pickaxe</name>
+				<level>2</level>
+				<value>2</value>
+				<cost>100</cost>
+			</tier>
+			<tier>
+				<name>Gold Pickaxe</name>
+				<level>3</level>
+				<value>30</value>
+				<cost>100</cost>
+			</tier>
 	</upgrade>
 	<upgrade>
 		<type>1</type>

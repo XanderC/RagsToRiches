@@ -30,12 +30,12 @@ public class SmeltingScreen implements Screen
 		Gdx.gl.glClearColor(0,0,0,1); //sets clear color to black
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT); //clear the batch
 		
-		ArrayMap<Items,SmeltingRecipe> smelt = _game.getSmeltingManager().getSmeltingRecipes();
-		Iterator<ObjectMap.Entry<Items, SmeltingRecipe>> itr = smelt.iterator();
+		ArrayMap<Items,Recipe> smelt = _game.getRecipeManager().getRecipes();
+		Iterator<ObjectMap.Entry<Items, Recipe>> itr = smelt.iterator();
 
 		while(itr.hasNext())
 		{
-			SmeltingRecipe recipe = itr.next().value;
+			Recipe recipe = itr.next().value;
 			recipe.getTimer().update();
 			recipe.getTimer().getStausbar().update(recipe.getTimer().getRemainingTime(),recipe.getTime());
 			recipe.getTimer().getStausbar().updateText(recipe.getTimer().getTime());
@@ -64,8 +64,8 @@ public class SmeltingScreen implements Screen
 		table.setSize(Gdx.graphics.getWidth(),Gdx.graphics.getHeight());
 		table.top();
 		
-		ArrayMap<Items,SmeltingRecipe> smelt = _game.getSmeltingManager().getSmeltingRecipes();
-		Iterator<ObjectMap.Entry<Items, SmeltingRecipe>> itr = smelt.iterator();
+		ArrayMap<Items,Recipe> smelt = _game.getRecipeManager().getRecipes();
+		Iterator<ObjectMap.Entry<Items, Recipe>> itr = smelt.iterator();
 		
 		table.add(btnBack).colspan(4).right().size(100,100);
 		table.row();
@@ -77,7 +77,7 @@ public class SmeltingScreen implements Screen
 		
 		while(itr.hasNext())
 		{
-			final SmeltingRecipe recipe = itr.next().value;
+			final Recipe recipe = itr.next().value;
 			TextButton btnSmelt = new TextButton("Smelt",skin);
 			
 			btnSmelt.addListener(new ClickListener()
@@ -133,7 +133,7 @@ public class SmeltingScreen implements Screen
 		// TODO: Implement this method
 	}
 	
-	private void smelt(SmeltingRecipe recipe)
+	private void smelt(Recipe recipe)
 	{
 		
 			switch(recipe.getTimer().getState())

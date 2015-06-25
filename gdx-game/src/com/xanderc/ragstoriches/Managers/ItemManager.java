@@ -1,3 +1,4 @@
+
 package com.xanderc.ragstoriches.Managers;
 import com.badlogic.gdx.*;
 import com.badlogic.gdx.files.*;
@@ -19,8 +20,7 @@ public class ItemManager
 		
 		ArrayMap<Items,IItem> items = new ArrayMap<Items,IItem>();
 		Iterator<ObjectMap.Entry<Items,IItem>> itr = items.iterator();
-		
-		
+		 
 		while(itr.hasNext())
 		{
 			IItem i = itr.next().value;
@@ -36,6 +36,7 @@ public class ItemManager
 	public void loadItems()
 	{
 		loadOres();
+		loadGems();
 		loadSmeltingItems();
 	}
 	
@@ -59,8 +60,6 @@ public class ItemManager
 
 				_itemList.put(RRUtilities.getItemEnumById(o.getId()),o);
 			}
-
-
 		}
 		catch(IOException e){}
 	}
@@ -85,8 +84,6 @@ public class ItemManager
 
 				_itemList.put(RRUtilities.getItemEnumById(g.getId()),g);
 			}
-
-
 		}
 		catch(IOException e){}
 	}
@@ -109,8 +106,6 @@ public class ItemManager
 				
 				_itemList.put(RRUtilities.getItemEnumById(i.getId()),i);
 			}
-
-
 		}
 		catch(IOException e){}
 	}
@@ -141,8 +136,6 @@ public class ItemManager
 		}
 	}
 	
-	
-	
 	public ArrayList<IItem> getOresByMiningLevel(UpgradeTier level)
 	{
 		ArrayList<IItem> ores = new ArrayList<IItem>();
@@ -155,6 +148,14 @@ public class ItemManager
 				if(ore.getMiningLevel() <= level.getValue())
 				{
 					ores.add(ore);
+				}
+			}
+			else if(i instanceof Gem)
+			{
+				Gem gem = (Gem)i;
+				if(gem.getMiningLevel() <= level.getValue())
+				{
+					ores.add(gem);
 				}
 			}
 		}

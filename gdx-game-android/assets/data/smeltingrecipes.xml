@@ -1,6 +1,7 @@
 <recipes>
 	<recipe>
 		<itemid>10</itemid>
+		<type>0</type>
 		<time>5000</time>
 		<requirement>
 			<itemid>1</itemid>

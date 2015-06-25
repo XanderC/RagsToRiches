@@ -12,7 +12,7 @@ import com.xanderc.ragstoriches.Managers.*;
 public class RagsToRiches extends Game
 {
 	private static Inventory _inventory;
-	private static SmeltingManager _smeltingManager;
+	private static RecipeManager _recipeManager;
 	private static UpgradeManager _upgradeManager = new UpgradeManager();
 	private static ItemManager _itemManager;
 	private static Player _player;
@@ -22,9 +22,9 @@ public class RagsToRiches extends Game
 		return _itemManager;
 	}
 
-	public static SmeltingManager getSmeltingManager()
+	public static RecipeManager getRecipeManager()
 	{
-		return _smeltingManager;
+		return _recipeManager;
 	}
 
 	public UpgradeManager getUpgradeManager()
@@ -47,11 +47,11 @@ public class RagsToRiches extends Game
 	{
 		_inventory = new Inventory();
 		_player = new Player();
-		_smeltingManager = new SmeltingManager(this);
+		_recipeManager = new RecipeManager(this);
 		_itemManager = new ItemManager();
 		_itemManager.loadItems();
 		_upgradeManager.loadUpgrades();
-		_smeltingManager.loadSmeltingRecipes();
+		_recipeManager.loadRecipes();
 		setScreen(new MainMenuScreen(this));
 	}
 

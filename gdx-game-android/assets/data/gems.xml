@@ -1,0 +1,50 @@
+<ores>
+	<ore>
+		<id>0</id>
+		<name>Stone</name>
+		<type>0</type>
+		<price>1</price>
+		<chance>5000</chance>
+		<level>0</level>
+	</ore>
+	<ore>
+		<id>1</id>
+		<name>Copper Ore</name>
+		<type>1</type>
+		<price>5</price>
+		<chance>2500</chance>
+		<level>0</level>
+	</ore>
+</ores>
+Beryl 9
+Aquamarine 3
+Emerald 5
+Bloodstone 11
+Celestite 7
+Cat's Eye 4
+Ruby 5
+Sapphire 5
+Diamond 6
+Feldspar 9
+Amazonite 9
+Moonstone 10
+Sunstone 10
+Fluorite 8
+Garnet 1
+Jade 1
+Jadeite 3
+Jasper 3
+Malachite 4
+Peridot 7
+Pyrite 8
+Quartz 6
+Amethyst 6
+Citrine 2
+Tiger's-eye 4
+Agate 2
+Onyx 7
+Spinel 10
+Topaz 1
+Turquoise 2
+Zircon 8
+Tanzanite 10
